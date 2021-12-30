@@ -1,6 +1,6 @@
+import json
 import psycopg2
 import psycopg2.extras
-
 
 class ManageStuff:
 
@@ -27,16 +27,12 @@ class ManageStuff:
         except Exception as e:
             print(f"Failed to connect to {self.database} at {self.host}:{self.port}: {e}")
 
-    def add_item(self, item_name, item_type):
-        self.cursor.execute("INSERT INTO items (name, type) VALUES (%s, %s);", (item_name, item_type))
+    def add_item(self, item_json):
+        item = json.loads(item_json)
+        print(item)
+        self.cursor.execute("INSERT INTO items (name, type) VALUES (%s, %s);", (item['name'], item['type']))
         self.connection.commit()
 
     def get_stuff(self):
         self.cursor.execute("SELECT name, type FROM items")
         return self.cursor.fetchall()
-
-
-ms1 = ManageStuff("localhost", 5432, "stuff", "bridgetbell", "password")
-ms1.connect_db()
-ms1.add_item("chair", "furniture")
-print(ms1.get_stuff())
