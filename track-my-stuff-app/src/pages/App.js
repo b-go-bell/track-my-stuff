@@ -1,13 +1,16 @@
-import '../styling/App.css';
-import '../components/Get.js';
+import { Component } from 'react';
 import Get from "../components/Get";
+import Add from "../components/Add";
 
-function App() {
-  return (
-    <div className="App">
-      <Get/>
-    </div>
-  );
+class App extends Component {
+    render(){
+        return (
+            <div>
+                <Add/>
+                <Get/>
+            </div>
+        );
+    }
 }
 
 export default App;

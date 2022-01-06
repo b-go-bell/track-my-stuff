@@ -25,22 +25,22 @@ class Get extends Component {
             });
     }
 
-    componentDidUpdate() {
-        fetch('/items', {method: "GET"})
-            .then(response => {
-                return response.json();
-            })
-            .then(resp => {
-                return resp;
-            })
-            .then((data) => {
-                let map = new Map();
-                for(var i = 0; i < data.length; i++){
-                    map.set(i+1, data[i]);
-                }
-                this.setState({items: map});
-            });
-    }
+    // componentDidUpdate() {
+    //     fetch('/items', {method: "GET"})
+    //         .then(response => {
+    //             return response.json();
+    //         })
+    //         .then(resp => {
+    //             return resp;
+    //         })
+    //         .then((data) => {
+    //             let map = new Map();
+    //             for(var i = 0; i < data.length; i++){
+    //                 map.set(i+1, data[i]);
+    //             }
+    //             this.setState({items: map});
+    //         });
+    // }
 
     printList() {
         let arr = [];
@@ -50,13 +50,15 @@ class Get extends Component {
         })
         return (
             <table>
+                <tbody key={"tbodyKey"}>
                 {arr.map((item) =>
                     <tr>
-                        <td> {item[0]} </td>
-                        <td> {item[1]} </td>
-                        <td> {item[2]} </td>
+                        <td key="{item[0]}"> {item[0]} </td>
+                        <td key="{item[1]}"> {item[1]} </td>
+                        <td key="{item[2]}"> {item[2]} </td>
                     </tr>
                 )}
+                </tbody>
             </table>
         );
     }
