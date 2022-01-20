@@ -1,17 +1,19 @@
 import { Component } from 'react';
+import Add from '../components/Add.js';
 import {Link} from "react-router-dom";
 
-class App extends Component {
+class AddPage extends Component {
     render(){
         return (
             <div>
-                <p>Welcome to Track My Stuff</p>
+                <Add/>
+                <br/>
                 <Link to={"/items"}>View My Items</Link>
                 <br/>
-                <Link to={"/add"}>Add an Item</Link>
+                <Link to={"/"}>Home</Link>
             </div>
         );
     }
 }
 
-export default App;
+export default AddPage;

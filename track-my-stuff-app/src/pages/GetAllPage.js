@@ -1,17 +1,20 @@
 import { Component } from 'react';
+import GetAll from '../components/GetAll.js';
 import {Link} from "react-router-dom";
 
-class App extends Component {
+class GetAllPage extends Component {
     render(){
         return (
             <div>
-                <p>Welcome to Track My Stuff</p>
-                <Link to={"/items"}>View My Items</Link>
+                <GetAll/>
+                <br/>
                 <br/>
                 <Link to={"/add"}>Add an Item</Link>
+                <br/>
+                <Link to={"/"}>Home</Link>
             </div>
         );
     }
 }
 
-export default App;
+export default GetAllPage;

@@ -27,12 +27,19 @@ class ManageStuff:
         except Exception as e:
             print(f"Failed to connect to {self.database} at {self.host}:{self.port}: {e}")
 
+    def get_stuff(self):
+        self.cursor.execute("SELECT id, name, type FROM items")
+        return self.cursor.fetchall()
+
+    def get_item(self, id):
+        self.cursor.execute("SELECT id, name, type FROM items WHERE id = (%s)", (id,))
+        return self.cursor.fetchall()
+
     def add_item(self, item_json):
         item = json.loads(item_json)
-        print(item)
-        self.cursor.execute("INSERT INTO items (name, type) VALUES (%s, %s);", (item['name'], item['type']))
+        self.cursor.execute("INSERT INTO items (name, type) VALUES (%s, %s)", (item['name'], item['type']))
         self.connection.commit()
 
-    def get_stuff(self):
-        self.cursor.execute("SELECT name, type FROM items")
-        return self.cursor.fetchall()
+    def delete_item(self, id):
+        self.cursor.execute("DELETE FROM items WHERE id = (%s)", (id,))
+        self.connection.commit()
